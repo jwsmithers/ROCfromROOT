@@ -4,6 +4,10 @@ from sklearn.metrics import roc_curve, auc
 import matplotlib.pyplot as plt
 import numpy as np
 import itertools
+from rootpy.plotting.style import get_style, set_style
+
+set_style('ATLAS', mpl=True)
+
 
 #myFile = root_open("ttgamma_SR1_ejets__HFT_MVA2_histos.root")
 #ttgamma = myFile.Get("HFT_MVA2_ttgamma")
@@ -56,11 +60,18 @@ roc_auc = auc(false_positive_rate, true_positive_rate)
 plt.title('')
 plt.plot(1-false_positive_rate,true_positive_rate, 'b',
 label='AUC = %0.2f'% roc_auc)
-plt.legend(loc='lower right')
+plt.legend(loc='upper right')
 plt.plot([1,0],[0,1],'r--')
 plt.xlim([-0.1,1.2])
 plt.ylim([-0.1,1.2])
 plt.ylabel('Background Rejection')
 plt.xlabel('Signal Efficiency')
+from matplotlib import rcParams
+rcParams['text.usetex'] = True
+plt.rc('font', family='sans-serif')
+plt.rc('font', serif='Helvetica')
+ax = plt.axes()
+ax.text(0.08, 1.08, r'{{\it \textbf {\Huge ATLAS}}}')
+ax.text(0.4, 1.08, r'{\huge Internal}')
 plt.show()
 
